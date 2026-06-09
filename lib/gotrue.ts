@@ -1,14 +1,15 @@
 // Thin REST client for Supabase Auth (GoTrue). Uses fetch directly to avoid
 // the supabase-js realtime/WebSocket initialisation. Server-only.
 
+// .trim() guards against trailing whitespace pasted into env vars.
 const URL_ = () => {
-  const u = process.env.NEXT_PUBLIC_SUPABASE_URL
+  const u = process.env.NEXT_PUBLIC_SUPABASE_URL?.trim()
   if (!u) throw new Error('NEXT_PUBLIC_SUPABASE_URL is not set')
   return u
 }
-const ANON = () => process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY ?? ''
+const ANON = () => (process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY ?? '').trim()
 const SERVICE = () => {
-  const k = process.env.SUPABASE_SERVICE_ROLE_KEY
+  const k = process.env.SUPABASE_SERVICE_ROLE_KEY?.trim()
   if (!k) throw new Error('SUPABASE_SERVICE_ROLE_KEY is not set')
   return k
 }
