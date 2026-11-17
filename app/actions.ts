@@ -13,7 +13,7 @@ export type BriefResult = { ok: true; text: string } | { ok: false; error: strin
 
 function advisorSystemPrompt(label: string, mission: string | null, context: string | null) {
   return [
-    `You are the ${label} advisor for Fahrenheit One @ Hakoah White City, a premium health & wellness club.`,
+    `You are the ${label} advisor for The Grandstand @ Hakoah Paddington, a premium health & wellness club.`,
     mission ? `Domain mission: ${mission}` : '',
     context ? `Domain context & knowledge:\n${context}` : '',
     `Be concise, strategic and practical. Give the GM clear, actionable guidance for this domain.`,
