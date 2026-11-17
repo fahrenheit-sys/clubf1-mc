@@ -33,14 +33,14 @@ CREATE TABLE IF NOT EXISTS mc_logs (
 CREATE INDEX IF NOT EXISTS idx_mc_logs_domain_status ON mc_logs(domain, status);
 CREATE INDEX IF NOT EXISTS idx_mc_logs_received ON mc_logs(received_at DESC);
 
--- Seed the 8 domains (ClickUp list ids carried over from the worker).
+-- Seed the domains — they match the TGSP Drive areas (changed 18 Nov 2026).
+-- ClickUp list ids reuse the old lists until TGSP lists exist in ClickUp.
 INSERT INTO mc_domains (key, label, mission, clickup_list_id, icon, sort_order) VALUES
-('operations', 'Operations',    'Internal systems and workflow efficiency.',     '901614361992', '',   1),
-('brand',      'Brand',         'Brand equity and market communication.',        '901614361994', '',   2),
-('tech',       'Tech',          'Infrastructure and technical scaling.',         '901614361996', '',   3),
-('retention',  'Retention',     'Maximizing customer lifetime value.',           '901614361998', '',   4),
-('sales',      'Sales',         'Driving revenue growth and conversion.',        '901614362000', '',   5),
-('bizdev',     'Business Dev',  'Partnerships and opportunities.',               '901614362003', '',   6),
-('build',      'Build & Fitout','Physical development and precinct fitout.',      '901614409703', '🏗️', 7),
-('general',    'General',       'Cross-domain strategy and oversight.',          '901614362004', '🌐', 8)
+('marketing',  'Marketing',  'Brand, pre-sales, lead generation and community outreach — filling The Grandstand to 3,000 members.', '901614361994', '', 1),
+('retention',  'Retention',  'Member experience, engagement and keeping members — attendance, connects and cancellations.',         '901614361998', '', 2),
+('operations', 'Operations', 'Running the club day to day — staff, timetable, member services and systems.',                       '901614361992', '', 3),
+('financial',  'Financial',  'Budget, cash flow and reporting against the agreed budget.',                                         '901614362004', '', 4),
+('technology', 'Technology', 'The tech stack — Hapana, EGYM, ScreenCloud, RFID and the My apps.',                                  '901614361996', '', 5),
+('suppliers',  'Suppliers',  'Supplier selection, contracts and fitout delivery.',                                                 '901614409703', '', 6),
+('general',    'General',    'Cross-domain strategy and oversight.',                                                               '901614362004', '', 7)
 ON CONFLICT (key) DO NOTHING;

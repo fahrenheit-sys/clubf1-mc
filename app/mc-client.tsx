@@ -70,7 +70,7 @@ export default function MissionControl({ domains, counts, setupNeeded, userEmail
             <div style={{ fontSize: 18, fontWeight: 600, color: UI.text, marginBottom: 8 }}>Setup required</div>
             <p style={{ fontSize: 14, color: UI.textMuted, lineHeight: 1.6 }}>
               No domains found. Run <code>supabase-schema-mc.sql</code> in your Supabase SQL Editor to create the
-              <code> mc_domains</code> / <code>mc_logs</code> tables and seed the eight domains, then reload.
+              <code> mc_domains</code> / <code>mc_logs</code> tables and seed the domains, then reload.
             </p>
           </div>
         ) : (

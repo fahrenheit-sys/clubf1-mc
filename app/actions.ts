@@ -31,7 +31,7 @@ export async function resolve(id: string, action: 'consider' | 'ignore', gmNote:
     if (dom?.clickup_list_id) {
       const r = await createClickUpTask({
         listId: dom.clickup_list_id,
-        name: `[F1: ${String(log.domain).toUpperCase()}] ${String(log.message).slice(0, 50)}`,
+        name: `[MC: ${String(log.domain).toUpperCase()}] ${String(log.message).slice(0, 50)}`,
         description: `INSIGHT: ${log.message}\n\nGM DIRECTIVE: ${gmNote || '—'}`,
         priority,
       })
