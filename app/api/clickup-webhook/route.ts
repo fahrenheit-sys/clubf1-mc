@@ -1,4 +1,4 @@
-import { NextResponse } from 'next/server'
+import { timingSafeEqual } from 'node:crypto'
 import { createServerSupabase } from '@/lib/supabase-server'
 
 export const dynamic = 'force-dynamic'
@@ -16,9 +16,20 @@ function findListId(obj: any): string | null {
   return null
 }
 
+// Key from the x-mc-secret header, or ?key= on the URL (ClickUp automations
+// can't always set headers). Compared in constant time.
+function authorised(req: Request): boolean {
+  const expected = process.env.MC_WEBHOOK_SECRET
+  if (!expected) return false
+  const given = req.headers.get('x-mc-secret') ?? new URL(req.url).searchParams.get('key') ?? ''
+  const a = Buffer.from(given), b = Buffer.from(expected)
+  return a.length === b.length && timingSafeEqual(a, b)
+}
+
 // ClickUp fires this when a task completes → log it as EXECUTED history,
-// routed to the domain that owns the list.
+// routed to the domain that owns the list. Requires MC_WEBHOOK_SECRET.
 export async function POST(req: Request) {
+  if (!authorised(req)) return new Response('Unauthorized', { status: 401 })
   try {
     const body = await req.json().catch(() => ({} as any))
     const listId = findListId(body)
