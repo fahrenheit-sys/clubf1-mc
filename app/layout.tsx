@@ -2,7 +2,7 @@ import type { Metadata } from 'next'
 import './globals.css'
 
 export const metadata: Metadata = {
-  title: 'My Mission Control — The Grandstand',
+  title: 'TGS Mission Control — The Grandstand',
   description: 'GM command centre — domain insights, triage, dispatch, and AI advisory.',
 }
 

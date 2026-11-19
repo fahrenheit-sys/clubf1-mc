@@ -47,7 +47,7 @@ export async function requireMcAccess(level: 'admin' | 'member' = 'member'): Pro
   const user = await getLiveSessionUser()
   if (!user) throw new Error('Not authenticated')
   const role = accessFor(user, TOOL)
-  if (!role) throw new Error('No access to My Mission Control')
+  if (!role) throw new Error('No access to TGS Mission Control')
   if (level === 'admin' && role !== 'admin') throw new Error('Admin access required')
   return user
 }
